@@ -1,6 +1,23 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+def euclidean_dist(a, b):
+    # This function calculates the euclidean distance between 2 point in 2-D coordinates
+    # if one of two points is (0,0), dist = 0
+    # a, b: input array with dimension: m, 2
+    # m: number of samples
+    # 2: x and y coordinate
+    try:
+        if (a.shape[1] == 2 and a.shape == b.shape):
+            # check if element of a and b is (0,0)
+            bol_a = (a[:,0] != 0).astype(int)
+            bol_b = (b[:,0] != 0).astype(int)
+            dist = np.linalg.norm(a-b, axis=1)
+            return((dist*bol_a*bol_b).reshape(a.shape[0],1))
+    except:
+        print("[Error]: Check dimension of input vector")
+        return 0
+    
 def load_X(X_path):
     file = open(X_path, 'r')
     X_ = np.array(
