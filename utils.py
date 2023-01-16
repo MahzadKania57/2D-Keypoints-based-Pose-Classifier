@@ -1,3 +1,6 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
 def load_X(X_path):
     file = open(X_path, 'r')
     X_ = np.array(
