@@ -110,7 +110,7 @@ def norm_X(X):
     
     return X_norm
   
- def plot_line(a, b):
+def plot_line(a, b):
     if (a.any()> 0 and b.any()>0): plt.plot([a[0], b[0]], [a[1], b[1]], 'k-')
         
 def plot_skeleton(sample, pattern):
