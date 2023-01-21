@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import cv2
+from google.colab.patches import cv2_imshow
 
 def euclidean_dist(a, b):
     # This function calculates the euclidean distance between 2 point in 2-D coordinates
@@ -210,3 +212,29 @@ def plot(sample):
         plot_skeleton(X_nor, 'ro')
     else:
         print("sample is one-dimension array: (36,)")
+   
+def norm2pix(norm):
+  return int((norm*256) + 256)
+
+def draw_graph(nodes, edge_index):
+  img = np.ones((512,512), dtype=np.uint8)
+  
+  color = (255, 255, 255)
+
+  #draw points
+  for i in range(nodes.shape[1]):
+   cv2.circle(img, (norm2pix(nodes[i][0]), norm2pix(nodes[i][0])), 4, (255, 255, 255), -1)
+
+  #draw lines
+  for i in range(edge_index.shape[1]):
+
+    start_node = edge_index[0][i]
+    end_node = edge_index[1][i]
+
+    p1 = norm2pix(nodes[start_node, 0]), norm2pix(nodes[start_node, 1])
+    p2 = norm2pix(nodes[end_node, 0]), norm2pix(nodes[end_node, 1])
+    cv2.line(img, p1, p2, color, thickness=2, lineType=cv2.LINE_AA)
+
+  #display image
+  cv2_imshow(img)
+
